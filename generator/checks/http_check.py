@@ -1,6 +1,6 @@
 import base_check
 import requests
-import json
+
 
 class BasicHttpCheck(base_check.Check):
     """simple class to test if an http is available """
@@ -15,6 +15,7 @@ class BasicHttpCheck(base_check.Check):
 
     def set_search_keyword(self, keyword):
         self.serach_on_page = keyword
+        return self
 
     def run_check(self):
         result = {'servicename':self.servicename,'checktype': self.__class__.__name__, 'url': self.url, 'timestamp': self.get_current_epoch_millis()}
@@ -31,4 +32,4 @@ class BasicHttpCheck(base_check.Check):
             print e
             result['status'] = 'Failure'
 
-        return json.dumps(result)
+        return result
